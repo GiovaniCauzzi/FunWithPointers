@@ -1,29 +1,32 @@
 #include "dataProcessing.h"
 
+
 void PrintData(dataset *data2print)
 {
-    for (int i = 0; i < data2print->numberOfLines; i++)
+    printf("X       |       Y\n");
+    for (int i = 0; i < dNUMBER_OF_POINTS; i++)
     {
-        printf("(x = %f ; y = %f)\n", data2print->data[i][0], data2print->data[i][1]);
+        printf("%f ; %f\n", data2print->x[i], data2print->y[i]);
     }
     return;
 }
 
-void InitDataTest(int numberOfPoints)
+void InitDataTest(void)
 {
-    DataTest = malloc(sizeof(dataset) + numberOfPoints * sizeof(double[2]));
-    DataTest->numberOfLines = numberOfPoints;
+    DataTest =  malloc(dNUMBER_OF_POINTS * 2*sizeof(float)); //+ numberOfPoints * sizeof(double[2]));
+    
 
-    for (int i = 0; i < numberOfPoints; i++)
+    for (int i = 0; i < dNUMBER_OF_POINTS; i++)
     {
-        DataTest->data[i][0] = i;
-        DataTest->data[i][1] = sin(i);
+        DataTest->x[i] = dRANGE_INIT + i*dSTEPS;
+        //y = 0.5x^{3} + 2x^{2} - 2
+        DataTest->y[i] = 0.5*pow((i*dSTEPS+dRANGE_INIT),3) + 2*pow((i*dSTEPS+dRANGE_INIT),2) - 2;
     }
 
-    if (dPRINT_DATASET_ON_INIT)
-    {
+    #ifdef dPRINT_DATASET_ON_INIT
         PrintData(DataTest);
-    }
+    #endif
+
     return;
 }
 

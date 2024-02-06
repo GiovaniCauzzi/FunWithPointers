@@ -18,7 +18,7 @@ int main(void)
     printf("O valor no addr 0x%X: %d\n", px, *px);
     //----------------------------------BASICS-----------------------------
 
-    InitDataTest(100);
+    InitDataTest();
     // freeDataset(DataTest);
     // InitDataTest(1000);
 
